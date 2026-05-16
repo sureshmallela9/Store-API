@@ -1,11 +1,18 @@
 spring:
   application:
     name: store-api
-  webflux:
-    base-path: /api
 
 server:
-  port: 7777
+  port: ${PORT:7777}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      show-details: always
 
 springdoc:
   api-docs:
