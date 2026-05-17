@@ -82,7 +82,12 @@ case "`uname`" in
     ;;
 esac
 
-CLASSPATH=$APP_HOME/gradle/wrapper/gradle-wrapper.jar
+CLASSPATH="$APP_HOME/gradle/wrapper/gradle-wrapper.jar"
+
+# Verify the wrapper jar exists and is readable
+if [ ! -f "$APP_HOME/gradle/wrapper/gradle-wrapper.jar" ] ; then
+    die "ERROR: gradle wrapper jar not found: $APP_HOME/gradle/wrapper/gradle-wrapper.jar"
+fi
 
 # Determine the Java command to use to start the JVM.
 if [ -n "$JAVA_HOME" ] ; then

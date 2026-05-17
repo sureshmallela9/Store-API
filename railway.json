@@ -2,13 +2,17 @@
   "$schema": "https://railway.app/railway.schema.json",
   "build": {
     "builder": "NIXPACKS",
-    "buildCommand": "sed -i -e 's/\\r$//' -e '1s/^\\xEF\\xBB\\xBF//' gradlew && chmod +x gradlew && ./gradlew bootJar -x test"
+    "buildCommand": "sed -i -e 's/\\r$//' -e '1s/^\\xEF\\xBB\\xBF//' gradlew && chmod +x gradlew && bash ./gradlew bootJar -x test --no-daemon"
   },
   "deploy": {
     "startCommand": "java -jar build/libs/store-api-0.0.1-SNAPSHOT.jar",
     "healthcheckPath": "/actuator/health",
     "healthcheckTimeout": 300,
     "restartPolicyType": "ON_FAILURE",
-    "restartPolicyMaxRetries": 10
+    "restartPolicyMaxRetries": 10,
+    "environment": {
+      "PORT": "$PORT",
+      "SERVER_ADDRESS": "0.0.0.0"
+    }
   }
 }
