@@ -147,7 +147,7 @@ if [ "$cygwin" = "true" -o "$msys" = "true" ] ; then
         JAVA_OPTS=""
     fi
     # now that we have OURCYGPATTERN we can use it to exclude everything up to /* in CLASSPATH
-    CLASSPATH=`cygpath --path --ignore --mixed -f - <<< "$CLASSPATH" | sed 's@'$OURCYGPATTERN'@'$cygpath -w "$dir"'@g' | tr '\n' ':'`
+    CLASSPATH=`cygpath --path --ignore --mixed -f - <<< "$CLASSPATH" | sed 's@'$OURCYGPATTERN'@'"$(cygpath -w "$dir")"'@g' | tr '\n' ':'`
 fi
 
 # Collect all arguments for the java command, stacking in reverse order:
@@ -192,7 +192,9 @@ fi
 DEFAULT_JVM_OPTS='"-Xmx64m" "-Xms64m"'
 
 # Adds the java args to the args list.
-eval set -- $DEFAULT_JVM_OPTS $JAVA_OPTS $GRADLE_OPTS "\"-Dorg.gradle.appname=$APP_BASE_NAME\"" -classpath "\"-Dclasspath=$CLASSPATH\"" org.gradle.wrapper.GradleWrapperMain "$APP_ARGS"
+# The -classpath flag must be followed by the classpath value (not a -D... property).
+# Restore the correct argument ordering and quoting expected by the Gradle wrapper.
+eval set -- $DEFAULT_JVM_OPTS $JAVA_OPTS $GRADLE_OPTS "-Dorg.gradle.appname=$APP_BASE_NAME" -classpath "$CLASSPATH" org.gradle.wrapper.GradleWrapperMain "$APP_ARGS"
 
 exec "$JAVACMD" "$@"
 
