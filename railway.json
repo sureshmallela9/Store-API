@@ -2,7 +2,7 @@
   "$schema": "https://railway.app/railway.schema.json",
   "build": {
     "builder": "NIXPACKS",
-    "buildCommand": "sed -i 's/\\r$//' gradlew && chmod +x gradlew && ./gradlew bootJar -x test"
+    "buildCommand": "sed -i -e 's/\\r$//' -e '1s/^\\xEF\\xBB\\xBF//' gradlew && chmod +x gradlew && ./gradlew bootJar -x test"
   },
   "deploy": {
     "startCommand": "java -jar build/libs/store-api-0.0.1-SNAPSHOT.jar",
