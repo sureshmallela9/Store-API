@@ -82,7 +82,12 @@ case "`uname`" in
     ;;
 esac
 
-CLASSPATH=$APP_HOME/gradle/wrapper/gradle-wrapper.jar
+CLASSPATH="$APP_HOME/gradle/wrapper/gradle-wrapper.jar"
+
+# Verify the wrapper jar exists and is readable
+if [ ! -f "$APP_HOME/gradle/wrapper/gradle-wrapper.jar" ] ; then
+    die "ERROR: gradle wrapper jar not found: $APP_HOME/gradle/wrapper/gradle-wrapper.jar"
+fi
 
 # Determine the Java command to use to start the JVM.
 if [ -n "$JAVA_HOME" ] ; then
@@ -196,5 +201,9 @@ DEFAULT_JVM_OPTS='"-Xmx64m" "-Xms64m"'
 # Restore the correct argument ordering and quoting expected by the Gradle wrapper.
 eval set -- $DEFAULT_JVM_OPTS $JAVA_OPTS $GRADLE_OPTS "-Dorg.gradle.appname=$APP_BASE_NAME" -classpath "$CLASSPATH" org.gradle.wrapper.GradleWrapperMain "$APP_ARGS"
 
+echo "DEBUG: JAVACMD=$JAVACMD"
+echo "DEBUG: ARGS:" "$@"
+printf 'DEBUG: ARGV: ' ; for __a in "$@" ; do printf '[%s] ' "$__a" ; done ; echo
+echo "DEBUG: CLASSPATH=[$CLASSPATH]"
 exec "$JAVACMD" "$@"
 
