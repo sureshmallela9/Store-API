@@ -201,5 +201,9 @@ DEFAULT_JVM_OPTS='"-Xmx64m" "-Xms64m"'
 # Restore the correct argument ordering and quoting expected by the Gradle wrapper.
 eval set -- $DEFAULT_JVM_OPTS $JAVA_OPTS $GRADLE_OPTS "-Dorg.gradle.appname=$APP_BASE_NAME" -classpath "$CLASSPATH" org.gradle.wrapper.GradleWrapperMain "$APP_ARGS"
 
+echo "DEBUG: JAVACMD=$JAVACMD"
+echo "DEBUG: ARGS:" "$@"
+printf 'DEBUG: ARGV: ' ; for __a in "$@" ; do printf '[%s] ' "$__a" ; done ; echo
+echo "DEBUG: CLASSPATH=[$CLASSPATH]"
 exec "$JAVACMD" "$@"
 
