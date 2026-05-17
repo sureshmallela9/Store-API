@@ -28,6 +28,9 @@ logs/
 *.war
 *.ear
 
+# Allow the Gradle wrapper jar to be committed (some templates ignore all jars)
+!gradle/wrapper/gradle-wrapper.jar
+
 # Maven/Gradle
 target/
 .m2/
